@@ -5,6 +5,7 @@ const userRouter = require("./RCS-logic/users/user.router");
 const { setUpSession } = require("./auth/session");
 const { Server } = require("socket.io");
 const { listenSocket } = require("./RCS-logic/users/user.socket.controller");
+const cors = require('cors');
 
 /*Create server*/
 const app = express();
@@ -12,7 +13,7 @@ const server = app.listen(process.env.APP_PORT, (req, res) => {
     console.log("Server up and running ON PORT", process.env.APP_PORT);
 });
 let io = new Server(server);
-
+app.use(cors());
 /*Use some middleware*/
 app.set("view engine", "ejs");
 app.use(express.static("./public")); 
