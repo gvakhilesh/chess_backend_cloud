@@ -3,7 +3,7 @@ const pool = require("../../config/database");
 module.exports = {
     create: (data, callBack) => {
         pool.query(
-            `INSERT INTO USER(userName, password, joinDate, rating) VALUES(?, ?, ?, ?)`,
+            `INSERT INTO USER_TABLE(username, password, joindate, rating) VALUES(?,?,?,?)`,
             [
                 data.username,
                 data.password,
@@ -16,13 +16,14 @@ module.exports = {
                 }
                 return callBack(null, results);
             }
+            
         );
     },
 
     getUserRatingByUsername: (name) => {
         return new Promise ((resolve, reject) => {
             pool.query(
-                `SELECT rating FROM USER WHERE userName = ?`,
+                `SELECT rating FROM USER_TABLE WHERE userName = ?`,
                 [
                     name
                 ],
@@ -37,7 +38,7 @@ module.exports = {
     getJoinDate: (name) => {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT joinDate FROM USER WHERE userName = ?`,
+                `SELECT joinDate FROM USER_TABLE WHERE userName = ?`,
                 [
                     name
                 ],
@@ -52,7 +53,7 @@ module.exports = {
     getCountWhiteGames: (name) => {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT COUNT(whiteId) FROM USER
+                `SELECT COUNT(whiteId) FROM USER_TABLE
                 INNER JOIN USER_VS_USER_GAME
                 ON userName = ? AND userId = whiteId`,
                 [
@@ -69,7 +70,7 @@ module.exports = {
     getCountBlackGames: (name) => {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT COUNT(blackId) FROM USER
+                `SELECT COUNT(blackId) FROM USER_TABLE
                 INNER JOIN USER_VS_USER_GAME
                 ON userName = ? AND userId = blackId`,
                 [
@@ -86,7 +87,7 @@ module.exports = {
     getCountWins: (name) => {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT COUNT(result) FROM USER
+                `SELECT COUNT(result) FROM USER_TABLE
                 INNER JOIN USER_VS_USER_GAME
                 ON (userName = ?) AND ((userId = blackId AND result = -1) OR (userId = whiteId AND result = 1))`,
                 [
@@ -103,7 +104,7 @@ module.exports = {
     getCountLosses: (name) => {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT COUNT(result) FROM USER
+                `SELECT COUNT(result) FROM USER_TABLE
                 INNER JOIN USER_VS_USER_GAME
                 ON (userName = ?) AND ((userId = blackId AND result = 1) OR (userId = whiteId AND result = -1))`,
                 [
@@ -120,7 +121,7 @@ module.exports = {
     updateRatingByUsername: (name, change) => {
         return new Promise((resolve, reject) => {
             pool.query(
-                `UPDATE USER
+                `UPDATE USER_TABLE
                 SET rating = rating + ?
                 WHERE userName = ?`,
                 [
@@ -161,7 +162,7 @@ module.exports = {
     getUserIdByUsername: async (name) => {
         return new Promise((resolve, reject) => {
             pool.query(
-                `SELECT userId FROM USER WHERE userName = ?`,
+                `SELECT userId FROM USER_TABLE WHERE userName = ?`,
                 [
                     name
                 ],
@@ -175,7 +176,7 @@ module.exports = {
 
     getUserByUsername: (username, callback) => {
         pool.query(
-            `SELECT * FROM USER WHERE username = ?`,
+            `SELECT * FROM USER_TABLE WHERE userName = ?`,
             [username],
             (error, results, fields) => {
                 if(error) {

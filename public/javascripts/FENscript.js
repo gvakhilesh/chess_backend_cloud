@@ -52,7 +52,7 @@ async function processImage(image) {
     try {
         const formData = new FormData();
         formData.append('image', image);
-        const response = await fetch('/ChessWebsite/boardToFen/process_image', {
+        const response = await fetch('http://localhost:3000/ChessWebsite/boardToFen/process_image', {
             method: 'POST',
             body: formData
         });
