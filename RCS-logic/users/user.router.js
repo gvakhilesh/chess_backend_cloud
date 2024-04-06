@@ -23,8 +23,8 @@ router.get("/login", (req, res) => {
 
 /*Here, we can see same route "/login" but with 2 different endpoints .get and .post*/
 
-router.post("/login", login);
-router.post("/signup", signUp);
+router.post("https://chess-backend-cloud.onrender.com/ChessWebsite/login", login);
+router.post("https://chess-backend-cloud.onrender.com/ChessWebsite/signup", signUp);
 router.post("/home/submitFeedback", requireAuthentication, saveFeedback);
 router.post("/playBot/GameOver", requireAuthentication, gameover);
 router.post("/boardToFen/process_image", requireAuthentication, upload.single("image"), sendFen);
