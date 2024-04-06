@@ -59,18 +59,18 @@ async function processImage(image) {
 
         if (response.ok) {
             const fen = await response.text();
-            console.log('Predicted FEN:', fen);
+            console.log('Predicted FEN string:', fen);
             let k=0;
             let str='';
             for(let i=0;i<fen.length;i++){
-               if(fen[i]==='p'){
+               if(fen[i]===':'){
                 for(let h=i+1;h<fen.length;h++){
                     str += fen[h];
                 }
                 break;
                }
             }
-            document.getElementById('output').textContent = str; // Display FEN in the output div
+            document.getElementById('output').textContent = fen; // Display FEN in the output div
         } else {
             showMessage('Error processing image.', false);
         }
