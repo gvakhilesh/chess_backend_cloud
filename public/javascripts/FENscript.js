@@ -70,7 +70,8 @@ async function processImage(image) {
                 break;
                }
             }
-            document.getElementById('output').textContent = fen; // Display FEN in the output div
+            document.getElementById('output').textContent = str;
+            console.log('str:', str); // Display FEN in the output div
         } else {
             showMessage('Error processing image.', false);
         }
