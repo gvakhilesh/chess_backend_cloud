@@ -1,5 +1,5 @@
 require("dotenv").config();
-const session = require('express-session');
+const session = require('cookie-session');
 
 module.exports = {
     setUpSession: session({
