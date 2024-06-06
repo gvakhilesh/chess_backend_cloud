@@ -175,7 +175,7 @@ module.exports = {
                 res.send(predictedFen); // Send predicted FEN back to client
             } else {
                 console.error('Python script execution failed with code:', code);
-                res.status(500).send("Error processing image.");
+                
             }
         });
     },
